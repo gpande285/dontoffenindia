@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Commitment Popup</title>
+    <style>
+        :root {
+            --primary-color: #7CB342;
+            --primary-dark: #689F38;
+            --primary-light: #8BC34A;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 70vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .popup-overlay.active .popup-container {
+            transform: translateY(0);
+        }
+        
+        .popup-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .popup-title {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+        
+        .popup-content {
+            padding: 20px;
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .language-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .language-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Table Styles */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .info-table th, .info-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-table th {
+            background-color: var(--bg-light);
+            font-weight: 600;
+        }
+        
+        /* Commitment Section */
+        .commitment-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .feature-item {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .feature-title {
+			font-weight: 600;
+			margin-bottom: 5px;
+			transition: transform 0.3s ease, color 0.3s ease;
+			
+		}
+
+		.feature-title:hover {
+			transform: scale(1.05);
+			color: var(--primary-dark);
+			cursor: pointer;
+		}
+        
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        /* Learn More Tab */
+        .learn-more-tab {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .tab-header {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- This button is just to demonstrate the popup -->
+    <button id="openPopupBtn" style="padding: 10px 20px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Show Privacy Commitment Popup
+    </button>
+
+    <!-- Popup Structure -->
+    <div class="popup-overlay" id="privacyPopup">
+        <div class="popup-container">
+            <div class="popup-header">
+                <h2 class="popup-title" id="popupTitle">Our Privacy Commitment</h2>
+                <button class="close-btn" id="closePopupBtn">&times;</button>
+            </div>
+            
+            <div class="popup-content">
+                <!-- Language Toggle -->
+                <div class="language-toggle">
+                    <button class="language-btn active" data-lang="en">English</button>
+                    <button class="language-btn" data-lang="hi">हिंदी (Hindi)</button>
+                </div>
+                
+                <!-- English Content -->
+                <div class="content-section active" id="content-en">
+                    <!-- Information Table -->
+                    
+                    
+                    <!-- Our Commitment Section -->
+                    <div class="commitment-section">
+                        <h3 class="section-title">Our Commitment</h3>
+                        <p>We understand that seeking help requires trust. That's why we've designed our services with privacy as a foundational principle.</p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <ul>
+									<div class="feature-title"><li>No personal data collection</li></div>
+									<div class="feature-title"><li>Anonymous communication channels</li></div>
+									<div class="feature-title"><li>Secure, encrypted referrals</li></div>
+									<div class="feature-title"><li>PIN-based identification system</li></div>
+								</ul>
+								
+								
+								
+								
+                               
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!-- Learn More Tab -->
+                    
+                </div>
+                
+                <!-- Hindi Content -->
+                <div class="content-section" id="content-hi">
+                    <!-- Information Table -->
+                    
+                    
+                    <!-- Our Commitment Section -->
+                    <div class="commitment-section">
+                        <h3 class="section-title">हमारी प्रतिबद्धता</h3>
+                        <p>हम समझते हैं कि सहायता लेने के लिए विश्वास की आवश्यकता होती है। इसीलिए हमने अपनी सेवाओं को गोपनीयता को आधारभूत सिद्धांत के रूप में डिजाइन किया है।</p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <ul>
+									<div class="feature-title"><li>कोई व्यक्तिगत डेटा संग्रहण नहीं</li></div>
+									<div class="feature-title"><li>अनाम संचार चैनल</li></div>
+									<div class="feature-title"><li>सुरक्षित, एन्क्रिप्टेड रेफरल</li></div>
+									<div class="feature-title"><li>PIN-आधारित पहचान प्रणाली</li></div>
+								</ul>
+								
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+				<div class="text-center">
+				<a href="content.html"><button id="openPopupBtn" style="padding: 10px 20px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+					Learn More
+				</button></a>
+				</div>
+            </div>
+        </div>
+		
+    </div>
+	
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const popup = document.getElementById('privacyPopup');
+            const openBtn = document.getElementById('openPopupBtn');
+            const closeBtn = document.getElementById('closePopupBtn');
+            const languageBtns = document.querySelectorAll('.language-btn');
+            const contentSections = document.querySelectorAll('.content-section');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            
+            // Open popup
+            openBtn.addEventListener('click', function() {
+                popup.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close popup
+            closeBtn.addEventListener('click', function() {
+                popup.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close popup when clicking outside
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) {
+                    popup.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Language toggle functionality
+            languageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Update active language button
+                    languageBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update active content section
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === `content-${lang}`) {
+                            section.classList.add('active');
+                        }
+                    });
+                    
+                    // Update popup title based on language
+                    const title = document.getElementById('popupTitle');
+                    title.textContent = lang === 'en' ? 'Our Privacy Commitment' : 'हमारी गोपनीयता प्रतिबद्धता';
+                });
+            });
+            
+            // Tab functionality
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    const currentLang = document.querySelector('.language-btn.active').getAttribute('data-lang');
+                    
+                    // Update active tab button
+                    const parent = this.closest('.tab-header');
+                    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update active tab content
+                    const tabContents = parent.nextElementSibling.parentElement.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        const contentId = content.id;
+                        if (contentId === `tab-${tabId}` || contentId === `tab-${tabId}-${currentLang}`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

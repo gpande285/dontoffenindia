@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Digital Outreach Initiative</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7CB342;
+            --primary-dark: #689F38;
+            --primary-light: #8BC34A;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: var(--primary-dark);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .privacy-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .privacy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+        }
+        
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            border: none;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border: 1px solid #dee2e6;
+        }
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(124, 179, 66, 0.05);
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(124, 179, 66, 0.1);
+        }
+        
+        .language-toggle {
+            background-color: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: inline-flex;
+        }
+        
+        .language-toggle .btn {
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .language-toggle .btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            background-color: rgba(124, 179, 66, 0.1);
+            color: var(--primary-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+		.headers_table{
+		 font-size: 2vh;
+		 
+		}
+        
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background-color: rgba(124, 179, 66, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        .hindi-text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: ltr;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .privacy-card {
+                padding: 1.5rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Digital Outreach Initiative</h1>
+            <p class="lead mb-0">Your privacy and security are our top priorities</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Language Toggle -->
+        <div class="text-center">
+            <div class="language-toggle">
+                <button class="btn btn-outline-primary active" id="englishBtn">English</button>
+                <button class="btn btn-outline-primary" id="hindiBtn">हिंदी</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mb-5" id="featuresSection">
+            <div class="col-md-3 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5>Data Protection</h5>
+                    <p class="text-muted">We don't collect personal or sensitive information</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h5>Anonymity</h5>
+                    <p class="text-muted">Your identity remains protected throughout</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h5>Secure Communication</h5>
+                    <p class="text-muted">All referrals use encrypted email services</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h5>PIN-Based System</h5>
+                    <p class="text-muted">Treatment and records use PINs only</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- English Content -->
+        <div id="englishContent">
+            <div class="privacy-card">
+                <h2 class="section-title">Privacy Policy - English</h2>
+                <p class="lead mb-4">We are committed to protecting your privacy. Below is how we handle your information across our different services:</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="headers_table">Sr. No.</th>
+                                <th scope="col" class="headers_table">DOI Website</th>
+                                <th scope="col" class="headers_table">DOI Chatbot</th>
+                                <th scope="col" class="headers_table">Hotline</th>
+                                <th scope="col" class="headers_table">Treatment Process</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>No personal/sensitive information is collected</td>
+                                <td>User is encouraged not to disclose any identifying information</td>
+                                <td>"When someone calls, the DOI team cannot see the phone number"</td>
+                                <td>Clients are referred into treatment using the PIN provided</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>We do not collect IP addresses</td>
+                                <td>We do not store any IP address or mac address on our service</td>
+                                <td>Caller is encouraged not to disclose any identifying information unless caller proactively shares it</td>
+                                <td>Throughout the treatment, clients are addressed only by their PIN.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td></td>
+                                <td>No information is saved when chatbot is offline/online</td>
+                                <td>Caller is provided with Personal Identification Number (PIN) for further communication</td>
+                                <td>All client files are documented using PIN only</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td></td>
+                                <td>Any referral to therapy from the chatbot is conducted via secure, encrypted email service only and protect all confidential communication.</td>
+                                <td></td>
+                                <td>Access to any treatment-related documents is strictly limited.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hindi Content (Hidden by Default) -->
+        <div id="hindiContent" style="display: none;">
+            <div class="privacy-card">
+                <h2 class="section-title">गोपनीयता नीति - हिंदी</h2>
+                <p class="lead mb-4">हम आपकी गोपनीयता की सुरक्षा के लिए प्रतिबद्ध हैं। नीचे बताया गया है कि हम अपनी विभिन्न सेवाओं में आपकी जानकारी को कैसे संभालते हैं:</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="headers_table">क्रमांक</th>
+                                <th scope="col" class="headers_table">DOI वेबसाइट</th>
+                                <th scope="col" class="headers_table">DOI चैटबॉट</th>
+                                <th scope="col" class="headers_table">हेल्पलाइन</th>
+                                <th scope="col" class="headers_table">इलाज प्रक्रिया</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>आपकी कोई निजी जानकारी नहीं ली जाती</td>
+                                <td>आपसे कहा जाता है कि अपना नाम या पहचान न बताएं</td>
+                                <td>फोन करने पर आपका नंबर टीम को दिखाई नहीं देता</td>
+                                <td>इलाज आपके दिए गए PIN नंबर से शुरू होता है</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>हम आपका IP पता नहीं लेते</td>
+                                <td>हम कोई IP या MAC पता सेव नहीं करते</td>
+                                <td>कॉल करने वाला अपना नाम या पहचान न बताए, जब तक वह खुद न चाहे</td>
+                                <td>इलाज के दौरान आपको केवल आपके PIN नंबर से ही बुलाया जाता है</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>---</td>
+                                <td>चैटबॉट बंद हो या चालू, आपकी कोई जानकारी सेव नहीं होती</td>
+                                <td>आपको आगे की बात के लिए एक PIN नंबर दिया जाता है</td>
+                                <td>सभी रिकॉर्ड्स केवल PIN नंबर पर बनाए जाते हैं</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td>---</td>
+                                <td>थेरेपी की जानकारी सिर्फ सुरक्षित ईमेल से भेजी जाती है (प्रोटोन इमेल)</td>
+                                <td>---</td>
+                                <td>इलाज से जुड़ी फाइलों को देखने की अनुमति बहुत कम लोगों को होती है</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="row mt-5">
+            <div class="col-md-6 mb-4">
+                <div class="privacy-card h-100">
+                    <h3 class="section-title">Our Commitment</h3>
+                    <p>We understand that seeking help requires trust. That's why we've designed our services with privacy as a foundational principle.</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            No personal data collection
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Anonymous communication channels
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Secure, encrypted referrals
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            PIN-based identification system
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="privacy-card h-100">
+                    <h3 class="section-title">How Our System Works</h3>
+                    <p>Our privacy-focused approach ensures you can seek help without concerns about your personal information:</p>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 0.8rem;">1</div>
+                        <div>You contact us through website, chatbot, or hotline</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 0.8rem;">2</div>
+                        <div>We provide a unique PIN for identification</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 0.8rem;">3</div>
+                        <div>All further communication uses only this PIN</div>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 0.8rem;">4</div>
+                        <div>Treatment and records are maintained anonymously</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2023 Digital Outreach Initiative. All rights reserved.</p>
+            <p class="mb-0">Your privacy and security are our priority</p>
+        </div>
+    </div>
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Language toggle functionality
+        const englishBtn = document.getElementById('englishBtn');
+        const hindiBtn = document.getElementById('hindiBtn');
+        const englishContent = document.getElementById('englishContent');
+        const hindiContent = document.getElementById('hindiContent');
+        
+        englishBtn.addEventListener('click', () => {
+            englishContent.style.display = 'block';
+            hindiContent.style.display = 'none';
+            englishBtn.classList.add('active');
+            hindiBtn.classList.remove('active');
+        });
+        
+        hindiBtn.addEventListener('click', () => {
+            englishContent.style.display = 'none';
+            hindiContent.style.display = 'block';
+            hindiBtn.classList.add('active');
+            englishBtn.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
